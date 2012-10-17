@@ -104,7 +104,9 @@ int main(int argc, char **argv)
          */
         fprintf(stderr, "----origin order: ");
         for (i = 1; i <= 10; i++)
-            fputc(recv_buf[1], stderr);
+            fputc(recv_buf[i], stderr);
+
+        fprintf(stderr, "\n");
     }
 
     return 0;
