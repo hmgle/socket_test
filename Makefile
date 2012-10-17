@@ -8,9 +8,9 @@ TARGET := socket_test_server socket_test
 
 all: $(TARGET)
 
-socket_test_server: $($@:%=%.o)
+socket_test_server: socket_test_server.o
 
-socket_test: $($@:%=%.o)
+socket_test: socket_test.o
 
 clean:
 	-rm -f $(TARGET)
