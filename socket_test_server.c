@@ -57,6 +57,7 @@ int main(int argc, char **argv)
     int socket_s = -1;
     int client_len;
     int ret;
+    int i;
     char recv_buf[MAX_RECV_BUF];
 
     socket_s = socket(AF_INET, SOCK_DGRAM, 0);
@@ -85,11 +86,11 @@ int main(int argc, char **argv)
         ret = recvfrom(socket_s, recv_buf, MAX_RECV_BUF, 0, (struct sockaddr *)&si_from, (socklen_t *)&client_len);
         if (ret < 0) {
             perror("recvfrom");
-        } else if (ret == MAX_RECV_BUF) {
+        } else if (ret == MAX_RECV_BUF) {           /* 长度正确 */
             fprintf(stderr, "--count is %ld--\n", count);
             count++;
         } else {
-            fprintf(stderr, "rev is %d\n", ret);
+            fprintf(stderr, "rev is %d\n", ret);    /* 长度截断 */
             fprintf(stderr, "--count is %ld--\n", count);
             count++;
         }
@@ -98,6 +99,12 @@ int main(int argc, char **argv)
             fprintf(stderr, "quit\n");
             break;
         }
+        /*
+         * 顺序打印
+         */
+        fprintf(stderr, "----origin order: ");
+        for (i = 1; i <= 10; i++)
+            fputc(recv_buf[1], stderr);
     }
 
     return 0;

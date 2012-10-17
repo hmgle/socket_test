@@ -112,9 +112,16 @@ int main(int argc, char **argv)
     tmp_buf = (char *)malloc(size);
 
     while (1) {
-        tmp_buf[10] = n_send % 10 + '0';
-        tmp_buf[9] = (n_send % 100) / 10 + '0';
-        tmp_buf[8] = (n_send % 1000) / 100 + '0';
+        tmp_buf[10] = n_send % 10 + '0';            /* 个位 */
+        tmp_buf[9] = (n_send % 100) / 10 + '0';     /* 十位 */
+        tmp_buf[8] = (n_send % 1000) / 100 + '0';   /* 百位 */
+        tmp_buf[7] = (n_send % 10000) / 1000 + '0';   /* 千位 */
+        tmp_buf[6] = (n_send % 100000) / 10000 + '0';   /* 万位 */
+        tmp_buf[5] = (n_send % 1000000) / 100000 + '0';   /* 十万位 */
+        tmp_buf[4] = (n_send % 10000000) / 1000000 + '0';   /* 百万位 */
+        tmp_buf[3] = (n_send % 100000000) / 10000000 + '0';   /* 千万位 */
+        tmp_buf[2] = (n_send % 1000000000) / 100000000 + '0';   /* 亿位 */
+        tmp_buf[1] = (n_send % 10000000000) / 1000000000 + '0';   /* 十亿位 */
         if (count > 0 && n_send == count - 1)
             tmp_buf[0] = 'q';
 
