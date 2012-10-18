@@ -31,8 +31,9 @@ void show_usage(char *prog)
 int main(int argc, char **argv)
 {
     uint32_t port = DEST_PORT;
-
     char *thisarg;
+    char **save_argv = argv;
+
     argc--;
     argv++;
     while (argc >= 1 && **argv == '-') {
@@ -41,12 +42,12 @@ int main(int argc, char **argv)
         switch (*thisarg) {
         case 'p':
             if (--argc <= 0)
-                show_usage(argv[0]);
+                show_usage(save_argv[0]);
             argv++;
             port = atoi(*argv);
             break;
         default:
-            show_usage(argv[0]);
+            show_usage(save_argv[0]);
         }
         argc--;
         argv++;

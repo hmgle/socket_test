@@ -38,9 +38,7 @@ int main(int argc, char **argv)
 	struct sockaddr_in server;
     int len = sizeof(server);
     int ret;
-#if 0
-    int i;
-#endif
+    char **save_argv = argv;
 
     argc--;
     argv++;
@@ -50,7 +48,7 @@ int main(int argc, char **argv)
         switch (*thisarg) {
         case 'c':
             if (--argc <= 0)
-                show_usage(argv[0]);
+                show_usage(save_argv[0]);
             argv++;
             count = atoi(*argv);
             if (count < 11)
@@ -58,36 +56,36 @@ int main(int argc, char **argv)
             break;
         case 'p':
             if (--argc <= 0)
-                show_usage(argv[0]);
+                show_usage(save_argv[0]);
             argv++;
             port = atoi(*argv);
             break;
         case 's':
             if (--argc <= 0)
-                show_usage(argv[0]);
+                show_usage(save_argv[0]);
             argv++;
             size = atoi(*argv);
             break;
         case 'f':
             if (--argc <= 0)
-                show_usage(argv[0]);
+                show_usage(save_argv[0]);
             argv++;
             freq = atoi(*argv);
             break;
         case 'q':
             if (--argc <= 0)
-                show_usage(argv[0]);
+                show_usage(save_argv[0]);
             argv++;
             cycle = atoi(*argv);
             break;
         default:
-            show_usage(argv[0]);
+            show_usage(save_argv[0]);
         }
         argc--;
         argv++;
     }
     if (argc < 1)
-        show_usage(argv[0]);
+        show_usage(save_argv[0]);
     char *serverip = *argv;
 
     memset((char *)&server, 0, sizeof(server));
@@ -121,7 +119,7 @@ int main(int argc, char **argv)
         tmp_buf[4] = (n_send % 10000000) / 1000000 + '0';   /* 百万位 */
         tmp_buf[3] = (n_send % 100000000) / 10000000 + '0';   /* 千万位 */
         tmp_buf[2] = (n_send % 1000000000) / 100000000 + '0';   /* 亿位 */
-        tmp_buf[1] = (n_send % 10000000000) / 1000000000 + '0';   /* 十亿位 */
+        // tmp_buf[1] = (n_send % 10000000000) / 1000000000 + '0';   /* 十亿位 */
         if (count > 0 && n_send == count - 1)
             tmp_buf[0] = 'q';
 

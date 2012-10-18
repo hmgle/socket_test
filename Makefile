@@ -1,4 +1,5 @@
 CFLAGS := -Wall -g -O0
+CC := gcc
 
 SRCS    :=  $(wildcard *.c)
 OBJS    :=  $(SRCS:%.c=%.o)
